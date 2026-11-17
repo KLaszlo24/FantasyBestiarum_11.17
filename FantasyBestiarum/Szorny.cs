@@ -38,7 +38,7 @@ namespace FantasyBestiarum
 
         public override string ToString()
         {
-            return $"ID: {id}, Név: {nev}, Veszélyesség Szint: {veszelyessegSzint}, Élőhely: {elohely}, Fő Gyengeség: {foGyengeseg}, Leggyakoribb Zsákmány: {LeggyakoribbZsakmany}, Veszélyes-e: {veszelyesE}";
+            return $"Név: {nev}, Veszélyesség Szint: {veszelyessegSzint}, Élőhely: {elohely}, Fő Gyengeség: {foGyengeseg}, Leggyakoribb Zsákmány: {LeggyakoribbZsakmany}, Veszélyes-e: {veszelyesE}";
         }
     }  
 }

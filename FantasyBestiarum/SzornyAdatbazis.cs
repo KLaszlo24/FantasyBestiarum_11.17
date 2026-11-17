@@ -1,18 +1,24 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
-using MySql.Data.MySqlClient;
 
 namespace FantasyBestiarum
 {
     internal class SzornyAdatbazis
     {
-        readonly string connectionString = "Server=localhost;Database=fantasybestariumdb;uid:root;Password=';";
+        private readonly string connectionString;
 
-        public List<Szorny> Betoltes()
+        public SzornyAdatbazis()
+        {
+            connectionString = "server=localhost;database=fantasybestariumdb;uid=root;pwd =;";
+        }
+
+        public List<Szorny> Feltolt()
         {
             var szornyek = new List<Szorny>();
-            using(MySqlConnection connection = new MySqlConnection(connectionString))
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
                 var query = "SELECT * FROM szornyek";
                 using (MySqlCommand command = new MySqlCommand(query, connection))
@@ -24,11 +30,11 @@ namespace FantasyBestiarum
                         {
                             int id = reader.GetInt32("id");
                             string nev = reader.GetString("nev");
-                            int veszelyessegSzint = reader.GetInt32("veszelyesseg_szint");
+                            int veszelyessegSzint = reader.GetInt32("VeszelyessegiSzint");
                             string elohely = reader.GetString("elohely");
-                            string foGyengeseg = reader.GetString("fo_gyengeseg");
-                            string leggyakoribbZsakmany = reader.GetString("leggyakoribb_zsakmany");
-                            bool veszelyesE = reader.GetBoolean("veszelyes_e");
+                            string foGyengeseg = reader.GetString("FoGyengeseg");
+                            string leggyakoribbZsakmany = reader.GetString("LeggyakoribbZsakmany");
+                            bool veszelyesE = reader.GetBoolean("VeszelyesE");
 
 
                             var szorny = new Szorny(id, nev, veszelyessegSzint, elohely, foGyengeseg, leggyakoribbZsakmany, veszelyesE);
@@ -36,9 +42,9 @@ namespace FantasyBestiarum
                         }
                     }
                 }
-            }
+
+              }
             return szornyek;
-            )
         }
     }
 }
